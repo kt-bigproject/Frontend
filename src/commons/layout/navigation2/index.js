@@ -1,7 +1,5 @@
 import styled from "@emotion/styled"
 import { useRouter } from "next/router";
-import { ExportOutlined } from "@ant-design/icons"; 
-
 
 const NavbarWrapper = styled.nav`
   background-color: white;
@@ -118,8 +116,7 @@ export default function LayoutNavigation() {
             </NavbarLink>
             </NavbarLinks>
             <NavbarLink>
-            <ExportOutlined />
-                <a onClick={onClickbutton5}>로그아웃</a>
+                <a onClick={onClickbutton5}>로그인/회원가입</a>
             </NavbarLink>
             
         </NavbarContainer>
