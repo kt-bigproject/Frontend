@@ -10,6 +10,7 @@ const NavbarWrapper = styled.nav`
   margin: 0;
   width: 97vw;
   overflow-x: hidden;
+  margin-top: 10px;
   
   
 `;
@@ -23,21 +24,25 @@ const NavbarContainer = styled.div`
 `;
 
 
-const NavbarLinks = styled.ul`
+const NavbarLinks = styled.div`
   list-style-type: none;
   display: flex;
   align-items: center;
   padding-left: 0;
 `;
 
-const NavbarLink = styled.li`
-  margin-left: 70px;
+const NavbarLink = styled.div`
+  margin-left: 90px;
+  display: flex;
+  align-items: center;
+  padding-left: 0;
   
-  a {
+  div {
     color: inherit;
     text-decoration: none;
     border-bottom: none;
     font-weight: bolder;
+    font-size: 17px;
     cursor: pointer;
 
 
@@ -46,16 +51,22 @@ const NavbarLink = styled.li`
         text-decoration-thickness: 2px;
     }
   }
+
+  .logout-icon {
+    position: relative;
+    right: 1px;
+  }
+
 `;
 
 const NavbarTitle = styled.h1`
-    font-size: 25px;
+    font-size: 12px;
     margin: 0;
 
     span {
     font-size: 32px;
     font-weight: bold;
-    color: green;
+    color: orange;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   }
 `;
@@ -105,21 +116,23 @@ export default function LayoutNavigation() {
             </NavbarTitle>
             <NavbarLinks>
             <NavbarLink>
-                <a onClick={onClickbutton1}>핸드 라이팅 연습</a>
+                <div onClick={onClickbutton1}>핸드 라이팅 연습</div>
             </NavbarLink>
             <NavbarLink>
-                <a onClick={onClickbutton2}>단어 맞추기</a>
+                <div onClick={onClickbutton2}>단어 맞추기</div>
             </NavbarLink>
             <NavbarLink>
-                <a onClick={onClickbutton3}>시그니처 핸드라이팅</a>
+                <div onClick={onClickbutton3}>시그니처 핸드라이팅</div>
             </NavbarLink>
             <NavbarLink>
-                <a onClick={onClickbutton4}>랜덤 펜팔</a>
+                <div onClick={onClickbutton4}>랜덤 펜팔</div>
             </NavbarLink>
             </NavbarLinks>
             <NavbarLink>
-            <ExportOutlined />
-                <a onClick={onClickbutton5}>로그아웃</a>
+            
+            <ExportOutlined className="logout-icon" />
+            <div onClick={onClickbutton5}>로그아웃</div>
+                
             </NavbarLink>
             
         </NavbarContainer>
