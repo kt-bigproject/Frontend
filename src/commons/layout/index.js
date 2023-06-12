@@ -27,22 +27,16 @@ export default function Layout(props) {
     const isMain = Main.includes(router.asPath);
     const isFunction = layoutFunction.includes(router.asPath);
     return (
-        <>
         <LayoutDiv>
             {!isMain && <Sidebar />}
             <div>
-            {!isFunction && <LayoutHeader>
-                
-                </LayoutHeader>}
-                
-                <LayoutNavigation />
-                
+                {!isMain && <LayoutHeader />}
+                {!isFunction && <LayoutNavigation />}
                 <div style = {{display: "flex"}}>
                     <div style={{width: "70%"}}>{props.children}</div>
                 </div>
             </div>
         </LayoutDiv>
-        </>
     )
 }
 
