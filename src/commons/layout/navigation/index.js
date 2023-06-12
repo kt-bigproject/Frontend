@@ -1,18 +1,32 @@
 import styled from "@emotion/styled"
 import { useRouter } from "next/router";
-import { ExportOutlined } from "@ant-design/icons"; 
+import { ExportOutlined } from "@ant-design/icons";
+import { useState, useEffect } from "react"; 
+
+const PageWrapper = styled.div`
+  height: 150vh;
+  overflow-y: auto; /* 세로 스크롤 활성 */
+  margin: 0;
+`;
 
 
 const NavbarWrapper = styled.nav`
   background-color: white;
-  padding: 2px 20px;
+  padding: 12px 20px;
   font-size: 16px;
   margin: 0;
   width: 97vw;
   overflow-x: hidden;
-  margin-top: 10px;
-  
-  
+  margin-top: 0px;
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: ${props =>
+    props.scrollShadow ? '0px 2px 4px rgba(0, 0, 0, 0.3)' : 'none'};
+  transition: box-shadow 0.3s ease;
+  display: ${({ hideNavbar }) => (hideNavbar ? "none" : "block")};
+
 `;
 
 const NavbarContainer = styled.div`
@@ -33,9 +47,11 @@ const NavbarLinks = styled.div`
 
 const NavbarLink = styled.div`
   margin-left: 90px;
-  display: flex;
+  display: ${(props) => (props.hideNavbar ? "none" : "flex")};
   align-items: center;
   padding-left: 0;
+  visibility: ${(props) => (props.hideNavbar ? "hidden" : "visible")};
+  opacity: ${(props) => (props.hideNavbar ? 0 : 1)};
   
   div {
     color: inherit;
@@ -72,71 +88,103 @@ const NavbarTitle = styled.h1`
 `;
 
 
-
 export default function LayoutNavigation() {
-
-    const a1 = useRouter()
+ 
+    const router = useRouter()
 
     const onClickbutton1 = () => {
-        a1.push('./핸드 라이팅 연습')
+      router.push('./핸드 라이팅 연습');
+  
     }
 
-    const a2 = useRouter()
 
     const onClickbutton2 = () => {
-        a2.push('./단어 맞추기')
+      router.push('./단어 맞추기');
     }
 
-    const a3 = useRouter()
 
     const onClickbutton3 = () => {
-        a3.push('./시그니처 핸드라이팅')
+      router.push('./시그니처 핸드라이팅');
     }
 
-    const a4 = useRouter()
 
     const onClickbutton4 = () => {
-        a4.push('./랜덤 펜팔')
+      router.push('./랜덤 펜팔');
     }
 
-    const a5 = useRouter()
 
     const onClickbutton5 = () => {
-        a5.push('./login')
+      router.push('./login');
     }
+
+    const [scrollShadow, setScrollShadow] = useState(false);
+
+    useEffect(() => {
+      const handleScroll = () => {
+        if (window.scrollY > 0) {
+          setScrollShadow(true);
+        } else {
+          setScrollShadow(false);
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, [])
+
+    const [hideNavbar, setHideNavbar] = useState(false);
+
+    useEffect(() => {
+      const currentPath = router.pathname;
+      if (
+        currentPath === "/핸드 라이팅 연습" ||
+        currentPath === "/단어 맞추기" ||
+        currentPath === "/시그니처 핸드라이팅" ||
+        currentPath === "/랜덤 펜팔"
+      ) {
+        setHideNavbar(true);
+      } else {
+        setHideNavbar(false);
+      }
+    }, [router.pathname]);
+
 
 
 
   return (
     
-    <NavbarWrapper>
-        <NavbarContainer>
-            <NavbarTitle>
-            <span>오</span>늘의 손 <span>글</span>씨
-            </NavbarTitle>
-            <NavbarLinks>
-            <NavbarLink>
-                <div onClick={onClickbutton1}>핸드 라이팅 연습</div>
-            </NavbarLink>
-            <NavbarLink>
-                <div onClick={onClickbutton2}>단어 맞추기</div>
-            </NavbarLink>
-            <NavbarLink>
-                <div onClick={onClickbutton3}>시그니처 핸드라이팅</div>
-            </NavbarLink>
-            <NavbarLink>
-                <div onClick={onClickbutton4}>랜덤 펜팔</div>
-            </NavbarLink>
-            </NavbarLinks>
-            <NavbarLink>
-            
-            <ExportOutlined className="logout-icon" />
-            <div onClick={onClickbutton5}>로그아웃</div>
-                
-            </NavbarLink>
-            
-        </NavbarContainer>
-    </NavbarWrapper>
+    <PageWrapper>
+      <NavbarWrapper scrollShadow={scrollShadow} hideNavbar={hideNavbar}>
+          <NavbarContainer>
+              <NavbarTitle>
+              <span>오</span>늘의 손 <span>글</span>씨
+              </NavbarTitle>
+              <NavbarLinks>
+              <NavbarLink hideNavbar={hideNavbar}>               
+                  <div onClick={onClickbutton1}>핸드 라이팅 연습</div>      
+              </NavbarLink>
+              <NavbarLink hideNavbar={hideNavbar}>
+                  <div onClick={onClickbutton2}>단어 맞추기</div>
+              </NavbarLink>
+              <NavbarLink hideNavbar={hideNavbar}>
+                  <div onClick={onClickbutton3}>시그니처 핸드라이팅</div>
+              </NavbarLink>
+              <NavbarLink hideNavbar={hideNavbar}>
+                  <div onClick={onClickbutton4}>랜덤 펜팔</div>
+              </NavbarLink>
+              </NavbarLinks>
+              <NavbarLink hideNavbar={hideNavbar}>
+              
+              <ExportOutlined className="logout-icon" />
+              <div onClick={onClickbutton5}>로그아웃</div>
+                  
+              </NavbarLink>
+              
+          </NavbarContainer>
+      </NavbarWrapper>
+      </PageWrapper>
     
   );
 }
