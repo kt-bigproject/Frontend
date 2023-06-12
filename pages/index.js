@@ -1,14 +1,14 @@
 import { useRouter } from "next/router"
 
 export default function Page() {
-  
-  const router = useRouter()
-  const onClickLogin = () => {
-    router.push('/login')
+  const aaa = useRouter()
+
+  const onclickbutton = () => {
+    aaa.push("../../")
   }
   return(
     <div>
-      <button onClick={onClickLogin}>로그인페이지로 이동하기</button>
+      <button onClick={onclickbutton}>로그인페이지로 이동하기</button>
     </div>
   )
 }

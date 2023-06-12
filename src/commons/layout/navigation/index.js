@@ -1,8 +1,8 @@
 import styled from "@emotion/styled"
 
 const Wrapper = styled.div`
-    height: 50px;
-    border: 2px solid green;
+    height: 100px;
+    border: 2px solid black;
 `
 
 export default function LayoutNavigation() {
