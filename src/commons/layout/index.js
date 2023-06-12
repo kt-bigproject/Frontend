@@ -31,8 +31,12 @@ export default function Layout(props) {
         <LayoutDiv>
             {!isMain && <Sidebar />}
             <div>
+            {!isFunction && <LayoutHeader>
+                
+                </LayoutHeader>}
+                
                 <LayoutNavigation />
-                {!isFunction && <LayoutHeader />}
+                
                 <div style = {{display: "flex"}}>
                     <div style={{width: "70%"}}>{props.children}</div>
                 </div>
@@ -41,3 +45,5 @@ export default function Layout(props) {
         </>
     )
 }
+
+
