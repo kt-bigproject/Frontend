@@ -9,7 +9,7 @@ const LayoutHeader = () => {
         <div className={styles.header}>
             <div className={styles.contents}>
             <div >
-                <Link href="/"><img height={20} src={`/ogleogle.png`} className="Logo"/></Link>
+                <Link href="/"><img width={100} src={`/ogleogle.png.jpg`} className="Logo"/></Link>
             </div>
             <div className={styles.sign}>
                 <ul>
