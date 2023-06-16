@@ -4,7 +4,7 @@ export default function Page() {
   const aaa = useRouter()
 
   const onclickbutton = () => {
-    aaa.push("../../")
+    aaa.push("../login")
   }
   return(
     <div>

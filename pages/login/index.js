@@ -1,88 +1,27 @@
-// import { Mydiv2 } from '../../styles/login/login.style'
-// import { Mydiv } from '../../styles/login/login.style'
+import { useContext } from "react";
+import AuthContext from "../../src/components/AuthContext/AuthContext";
 
-// export default function Loginpage() {
-//     return (
-//         <Mydiv>
-//             <Mydiv2>asd</Mydiv2>
-//             <div>asada</div>
-//         </Mydiv>
-//     )
-// }
+export default function LoginPage() {
+  const { loginUser } = useContext(AuthContext);
+  const handleSubmit = e => {
+    e.preventDefault();
+    const username = e.target.username.value;
+    const password = e.target.password.value;
+    username.length > 0 && loginUser(username, password);
+  };
 
-import { Button, Checkbox, Form, Input } from 'antd';
-const onFinish = (values) => {
-  console.log('Success:', values);
+  return (
+    <section>
+      <form onSubmit={handleSubmit}>
+        <h1>Login </h1>
+        <hr />
+        <label htmlFor="username">id</label>
+        <input type="text" id="username" placeholder="Enter Username" /><br />
+        <label htmlFor="password">Password</label>
+        <input type="password" id="password" placeholder="Enter Password" /><br />
+        <button type="submit">Login</button>
+      </form>
+    </section>
+  );
+
 };
-const onFinishFailed = (errorInfo) => {
-  console.log('Failed:', errorInfo);
-};
-const App = () => (
-  <Form
-    name="basic"
-    labelCol={{
-      span: 8,
-    }}
-    wrapperCol={{
-      span: 16,
-    }}
-    style={{
-      maxWidth: 600,
-    }}
-    initialValues={{
-      remember: true,
-    }}
-    onFinish={onFinish}
-    onFinishFailed={onFinishFailed}
-    autoComplete="off"
-  >
-    <Form.Item
-      label="Username"
-      name="username"
-      rules={[
-        {
-          required: true,
-          message: 'Please input your username!',
-        },
-      ]}
-    >
-      <Input />
-    </Form.Item>
-
-    <Form.Item
-      label="Password"
-      name="password"
-      rules={[
-        {
-          required: true,
-          message: 'Please input your password!',
-        },
-      ]}
-    >
-      <Input.Password />
-    </Form.Item>
-
-    <Form.Item
-      name="remember"
-      valuePropName="checked"
-      wrapperCol={{
-        offset: 8,
-        span: 16,
-      }}
-    >
-      <Checkbox>Remember me</Checkbox>
-    </Form.Item>
-
-    <Form.Item
-      wrapperCol={{
-        offset: 8,
-        span: 16,
-      }}
-    >
-      <Button type="primary" htmlType="submit">
-        Submit
-      </Button>
-    </Form.Item>
-  </Form>
-);
-export default App;
