@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import LayoutHeader from "./header";
-import LayoutNavigation from "./navigation";
+import LayoutNavigation from "./navigation4";
 import Sidebar from "./sidebar";
 import styled from "@emotion/styled";
 
@@ -27,16 +27,17 @@ export default function Layout(props) {
     const isMain = Main.includes(router.asPath);
     const isFunction = layoutFunction.includes(router.asPath);
     return (
-        <LayoutDiv>
-            {!isMain && <Sidebar />}
-            <div>
-                {!isMain && <LayoutHeader />}
-                {!isFunction && <LayoutNavigation />}
-                <div style = {{display: "flex"}}>
-                    <div style={{width: "70%"}}>{props.children}</div>
-                </div>
-            </div>
-        </LayoutDiv>
+        <LayoutNavigation></LayoutNavigation>
+        // <LayoutDiv>
+        //     {!isMain && <Sidebar />}
+        //     <div>
+        //         {!isMain && <LayoutHeader />}
+        //         {!isFunction && <LayoutNavigation />}
+        //         <div style = {{display: "flex"}}>
+        //             <div style={{width: "70%"}}>{props.children}</div>
+        //         </div>
+        //     </div>
+        // </LayoutDiv>
     )
 }
 
